@@ -1,0 +1,49 @@
+<% include partial/head.ejs %>
+
+<p id="counter"></p>
+
+<div class="popup">
+  <button id="startButton">play</button>
+</div>
+
+<div id="colorPopup" class="none">
+  <h2>Choose Color</h2>
+  <div class="grid">
+    <div id="red"></div>
+    <div id="green"></div>
+    <div id="coral"></div>
+    <div id="hotpink"></div>
+    <div id="black"></div>
+    <div id="gray"></div>
+    <div id="lavender"></div>
+    <div id="purple"></div>
+  </div>
+</div>
+
+<div class="joinPopup none">
+  <h2>Someone want's to play a game!</h2>
+  <button id="join">Play Along</button>
+</div>
+
+<h1>Flappy</h1>
+<div id="field">
+  <div id="players">
+</div>
+<h1>Bird</h1>
+
+  <div id="obstacles">
+    <div id="obstacle">
+      <div class="top">
+
+      </div>
+      <div class="bottom">
+
+      </div>
+      <div class="safe">
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<% include partial/tail.ejs %>

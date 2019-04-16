@@ -1,0 +1,187 @@
+@import url('https://fonts.googleapis.com/css?family=VT323');
+
+*{
+  font-family: "VT323";
+  text-align: center
+}
+
+#colorPopup {
+  position: fixed;
+  text-align: center;
+  height: auto;
+  padding-bottom: 2vh;
+  width: 40vh;
+  background: gray;
+  border: dotted;
+  z-index: 3;
+  bottom: 36vh;
+  left: 50%;
+  margin: 0 -20vh;
+}
+
+.grid {
+  background: white;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 1vh 0;
+  padding: 5% 5%;
+  margin: 0 10%;
+}
+
+.grid div {
+  background: red;
+  height: 5vh;
+  width: 5vh;
+  border-radius: 50%;
+}
+
+button{
+  width: 20vh;
+  /* height: 5vh; */
+  font-size: 2rem;
+  border: 2px dotted;
+  animation: changeColor 2s infinite;
+  background: lightgray;
+}
+
+p {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  width: 40vh;
+  z-index: 3;
+  margin: -20vh;
+}
+
+h2 {
+  color: black
+}
+
+@keyframes changeColor {
+  0%, 100% {
+    border-color: green
+  } 20% {
+    border-color: orange
+  } 40% {
+    border-color: hotpink
+  } 60% {
+    border-color: blue
+  } 80% {
+    border-color: red
+  }
+}
+
+#field {
+  background: url(https://alertageekchile.cl/wp-content/uploads/2018/11/UZKEjzG.png);
+  background-size: cover;
+  height: 80vh;
+  width: 80vh;
+  position: absolute;
+  margin: -40vh;
+  left: 50%;
+  top: 50%;
+}
+
+h1 {
+  margin: 0;
+padding: 0;
+position: absolute;
+left: 20vh;
+margin: -5vh -45vh;
+left: 50%;
+height: 10vh;
+width: 10vh;
+top: 50%;
+transform: rotate(-90deg);
+}
+
+h1:nth-child(2){
+  margin: -5vh 35vh;
+  transform: rotate(90deg)
+}
+
+#players {
+  position: absolute;
+  left: 5vh;
+  width: 5vh;
+  height: 100%;
+}
+
+#players div {
+  position: absolute;
+  background-color: red;
+  border-radius: 50%;
+  height: 5vh;
+  width: 5vh;
+  bottom: 0vh;
+  transition: all 0.5s linear;
+  z-index: 5
+/*   transform: translateY(-75vh) */
+}
+
+#obstacles {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+#obstacles > div {
+  position: relative;
+  width: 10vh;
+  height: 100%;
+  right: 0;
+  transform: translateX(90vh)
+}
+
+.safe, .top, .bottom {
+  position: absolute;
+  height: 15vh;
+  width: 10vh;
+  bottom: 0;
+  background-image: url(./img/wall.jpg);
+}
+
+.safe {
+  opacity: 0;
+}
+
+.top {
+  height: 0;
+  top: 0;
+  transform-origin: top;
+}
+
+.bottom {
+  height: 0;
+  bottom: 0;
+  transform-origin: bottom;
+}
+
+.joinPopup {
+  text-align: center;
+width: 80vw;
+height: 40vw;
+position: fixed;
+z-index: 1;
+margin: -20vw -40vw;
+left: 50%;
+top: 50%;
+color: white;
+}
+
+.start {
+  animation: slide 5s infinite linear
+}
+
+.none{
+  display: none;
+}
+
+@keyframes slide{
+  from {
+    transform: translateX(90vh)
+  } to {
+    transform: translateX(-10vh)
+  }
+}

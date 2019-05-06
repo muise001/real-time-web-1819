@@ -11,10 +11,10 @@ const io = require('socket.io')(app.listen(PORT, () => {
 // TWITTER
 
 const T = new Twit({
-  consumer_key:         'rzFDNuTUcuPWxzB66xFrgehJw',
-  consumer_secret:      'RS5Qopj7qfm58oA09DxTs74kU2FwnjbtuncwZiDCqKLAGmPvin',
-  access_token:         '986187646295781376-pUj9RlE2pwc2PY2efJg9pgB9t2k2ak9',
-  access_token_secret:  'J0CritEmhk18Qws9PR8tVtjvzDjji8cId2ux5myTA7qcG',
+  consumer_key:         'SECRET',
+  consumer_secret:      'SECRET',
+  access_token:         'SECRET',
+  access_token_secret:  'SECRET',
   timeout_ms:           60*1000,  // optional HTTP request timeout to apply to all requests.
 })
 

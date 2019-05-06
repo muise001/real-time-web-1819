@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=VT323');
 
+:root {
+  --gameSpeed: 5000ms;
+}
+
 *{
   font-family: "VT323";
   text-align: center
@@ -45,7 +49,7 @@ button{
   background: lightgray;
 }
 
-p {
+p:not(.tweet p) {
   position: fixed;
   left: 50%;
   top: 50%;
@@ -171,7 +175,7 @@ color: white;
 }
 
 .start {
-  animation: slide 5s infinite linear
+  animation: slide var(--gameSpeed) infinite linear
 }
 
 .none{
@@ -184,4 +188,42 @@ color: white;
   } to {
     transform: translateX(-10vh)
   }
+}
+
+/* Twitter */
+
+.tweet {
+  box-sizing: border-box;
+  padding: 1rem;
+  margin: 0 calc(50vw - 202px);
+  left: 0;
+  /* text-align: left; */
+  position: absolute;
+  display: flex;
+  width: 400px;
+  border: solid gray 1px;
+  background: #83cb53;
+  bottom: 0;
+  z-index: 1;
+  opacity: 0.4;
+}
+
+.tweet p {
+  text-align: left;
+}
+
+.pic {
+  position: relative;
+  width: 20%;
+  height: 100%;
+}
+
+.pic img {
+  border-radius: 50%;
+  width: 100%;
+}
+
+.main {
+  margin-left: 1rem;
+  width: 80%;
 }

@@ -7,9 +7,11 @@ const joinPopup = document.querySelector(".joinPopup")
 const joinButton = document.getElementById("join")
 const playerContainer = document.getElementById("players")
 const colorPopup = document.getElementById("colorPopup")
+const userNameInput = document.getElementById("setUserName")
 
 let id = ""
 let inGame = false
+let gameSpeed = 5000
 
 socket.on("status", (SocketID, progress) => {
   id = SocketID
@@ -27,21 +29,24 @@ startButton.addEventListener("click", () => {
 joinButton.addEventListener("click", () => {
   joinPopup.classList.add("none")
   colorPopup.classList.remove("none")
-  document.querySelectorAll(".grid div").forEach(color => {
-    color.style.background = color.id
-    color.addEventListener("click", (e) => {
-      colorPopup.classList.add("none")
-      socket.emit("join", e.target.id)
-    })
+})
+
+document.querySelectorAll(".grid div").forEach(color => {
+  color.style.background = color.id
+  color.addEventListener("click", (e) => {
+    colorPopup.classList.add("none")
+    socket.emit("join", e.target.id, userNameInput.value)
   })
 })
 
 socket.on("newPlayer", (newPlayerId, color) => {
-  playerContainer.innerHTML += `<div id="${newPlayerId}" style="background-color:${color}"></div>`
-  console.log(playerContainer)
-  if (newPlayerId === id ) {
-    inGame = true
-    playGame(id)
+  if (!document.getElementById(newPlayerId)) {
+    playerContainer.innerHTML += `<div id="${newPlayerId}" style="background-color:${color}"></div>`
+    if (newPlayerId === id && document.getElementById(id)) {
+      document.getElementById(id).style.zIndex = "6"
+      inGame = true
+      playGame()
+    }
   }
 })
 
@@ -53,6 +58,21 @@ socket.on("enemyUpdate", (enemyId, enemyPosish) => {
   } else {
     enemyPlayer.style.transform = `translateY(-${enemyPosish}vh)`
   }
+})
+
+socket.on("tweet", (user, image, tweet, effect, speed) => {
+  console.log(effect);
+  document.querySelector(".tweet b").innerHTML = user
+  document.querySelector(".tweet img").src = image
+  document.querySelector(".tweet p").innerHTML = tweet
+  if (effect === "upside down") {
+    upsideDown = !upsideDown
+  }
+})
+
+socket.on("speedUp", speed => {
+  gameSpeed = speed
+  document.body.style.setProperty('--gameSpeed', `${gameSpeed}ms`)
 })
 
 function notify(enemyId){
@@ -73,32 +93,43 @@ socket.on("countdown", () => {
       obstacle.classList.add("start")
       joinPopup.classList.add("none")
     }
-  }, 1000);
+  }, gameSpeed / 5);
 })
 
 // GAME
 
 let alive = false
+let upsideDown = false
 
-function playGame(myID){
+function playGame(){
   if (inGame) {
     alive = true
+    upsideDown = false
+    gameSpeed = 5000
     const field = document.getElementById("field")
     const safeSpace = document.querySelector(".safe")
     const obsTop = document.querySelector(".top")
     const obsBottom = document.querySelector(".bottom")
+    const winner = document.getElementById("winner")
     let yPos = 0
 
     const interval = setInterval(() => {
-      yPos -= 3
+      yPos = upsideDown ? yPos + 3 : yPos - 3
       yPosCheck()
-    }, 200);
+    }, gameSpeed / 25);
 
     field.addEventListener("click", manipulatePos)
+    document.body.addEventListener("keydown", spaceBar)
+
+    function spaceBar(e) {
+      if(e.which === 32 || e.which === 38) {
+        manipulatePos()
+      }
+    }
 
     function manipulatePos() {
       if(alive) {
-        yPos += 10
+        yPos = upsideDown ? yPos - 10 : yPos + 10
         yPosCheck()
       }
     }
@@ -109,56 +140,70 @@ function playGame(myID){
       } else if(yPos <= 0){
         yPos = 0
       }
-      document.querySelector(`#players > #${id}`).style.transform = `translateY(-${yPos}vh)`
-      socket.emit("playerUpdate", yPos)
+      if (document.getElementById(id)) {
+        document.getElementById(id).style.transform = `translateY(-${yPos}vh)`
+        socket.emit("playerUpdate", yPos)
+      }
     }
 
     function checkCollish(){
-      let player = document.querySelector(`#players > #${id}`)
+      let player = document.getElementById(id)
       playerPos = [player.getBoundingClientRect().top, player.getBoundingClientRect().bottom]
       rngPos = [safeSpace.getBoundingClientRect().top, safeSpace.getBoundingClientRect().bottom]
       if (playerPos[0] < rngPos[0] || playerPos[1] > rngPos[1]) {
         alive = false
         clearInterval(interval)
         socket.emit("playerDied")
-        document.querySelector(`#players > #${id}`).style.opacity = `0`
+        document.getElementById(id).style.opacity = `0`
       }
     }
 
     socket.on("obstaclePosish", rng => {
-      console.log(rng);
+      obstacle.classList.remove("start")
+      // From: https://css-tricks.com/restart-css-animation/
+      void obstacle.offsetWidth;
+      obstacle.classList.add("start")
       obsTop.style.height = `${65 - rng}vh`
       obsBottom.style.height = `${rng}vh`
-      console.log(obsBottom);
       safeSpace.setAttribute("style", `transform: translateY(-${rng}vh)`)
-      setTimeout(() => {
+      let checkingCollish = setTimeout(() => {
         let i = 0
         let microTimer = setInterval(() => {
-          i += 100
-          if(i < 800){
+          i += (gameSpeed / 50)
+          if(i < (gameSpeed / 6.25)){
             if (alive) {
+              console.log("checking Collish");
               checkCollish()
             }
-          } if ( i === 1000 ) {
+          } if ( i === (gameSpeed / 5)) {
             clearInterval(microTimer)
+            clearTimeout(checkingCollish)
           }
-        }, 100)
-      }, 4000)
+        }, gameSpeed / 50)
+      }, gameSpeed / 1.25)
     })
 
     socket.on("winner", winnerID => {
       setTimeout(() => {
-        console.log(winnerID + " won the game")
+        console.log("winner");
         safeSpace.setAttribute("style", `transform: translateY(-${0}vh)`)
         field.removeEventListener("click", manipulatePos, true)
+        field.removeEventListener("keydown", spaceBar, true)
         playerContainer.innerHTML = ""
         startButton.classList.add("none")
         obstacle.classList.remove("start")
         startButton.classList.remove("none")
+        winner.innerHTML = `${winnerID} won the game`;
+        winner.classList.remove("none")
+        upsideDown = false
         inGame = false
         clearInterval(interval);
         playGame()
-      }, 1000)
+        setTimeout(() => {
+          console.log("winner - fade out");
+          winner.classList.add("none")
+        }, gameSpeed / 2.5)
+      }, gameSpeed / 5)
     })
   } else {
     return

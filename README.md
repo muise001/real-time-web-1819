@@ -36,8 +36,8 @@ else if (tweet.text.toLowerCase().includes("speed up")) {
 })    
 ```
 
-Dit werkte niet..... Maar eehm.. Op papier werkte het vet goed.. Maarja... internet....
-Uiteindelijk is [css-tricks](https://css-tricks.com/restart-css-animation/) zo lief geweest om het antwoord te geven op mijn vraag.
+*Dit werkte niet..... Maar eehm.. Op papier werkte het vet goed.. Maarja... ehm internet?....* <br/>
+Uiteindelijk is [css-tricks](https://css-tricks.com/restart-css-animation/) zo lief geweest om het antwoord te geven op mijn verschikkelijke bug.
 
 ```javascript
   obstacle.classList.remove("start")
@@ -45,7 +45,7 @@ Uiteindelijk is [css-tricks](https://css-tricks.com/restart-css-animation/) zo l
   obstacle.classList.add("start")
 ```
 
-Dit was mijn ergste bug.
+Het weghalen en weer toevoegen van de Class leek mij in de eerste instantie genoeg om ervoor te zorgen dat hij herstart zou woren. Helaas was dit niet waar. Gelukkig heeft `void obstacle.offsetWidth;` mij geholpen om de hapering uit de animatie te halen. Dit was mijn aller ergste bug.
 
 ### Socket.broadcast.emit
 Om de app real-time te maken heb ik [socket.io](socket.io) gebruikt. Deze library zorgt ervoor dat er een real-time connectie wordt gemaakt tussen de Server-side javascript en de Client-side javascript. Het krachtige van Socket.io is dat het heel makkelijk te begrijpen is. Ik geef een voorbeeld uit mijn app. 
@@ -99,48 +99,22 @@ socket.on("enemyUpdate", (enemyId, enemyPosish, alive, amount) => {
     - `io.emit("tweet", tweet.user.name, tweet.user.profile_image_url_https, tweet.text, "upside down")` of
     - `io.emit("tweet", tweet.user.name, tweet.user.profile_image_url_https, tweet.text, "speed up")`
 
-[Rubric][rubric]
-
-## Curriculum
-
-### Week 1 - Hello Server
-
-Goal: Build and deploy a unique barebone real-time app  
-
-[Exercises](https://github.com/cmda-minor-web/real-time-web-1819/blob/master/week-1.md)    
-[Slides](https://docs.google.com/presentation/d/1EVsEFgBnG699nce058ss_PkVJROQXDp5wJJ-IRXvzTA/edit?usp=sharing)  
-
-
-### Week 2 - Sharing is caring  
-
-Goal: Store, manipulate and share data between server-client   
-
-[Exercises](https://github.com/cmda-minor-web/real-time-web-1819/blob/master/week-2.md)    
-[Slides](https://docs.google.com/presentation/d/1woKoY59D8Zcttna0FzfNjEtGtT8oXWi9b5LYlukRISM/edit?usp=sharing)
-
-
-### Week 3 - Let’s take this show on the road 
-
-Goal: Handle data sharing and multi-user support 
-
-[Exercises](https://github.com/cmda-minor-web/real-time-web-1819/blob/master/week-3.md)  
-[Slides](https://docs.google.com/presentation/d/1SHofRYg87bhdqhv7DQb_HZMbW7Iq1PtqxpdtZHMbMmk/edit?usp=sharing)
 
 > If you're seeing this message on a forked repo, it means one of our students hasn't changed the description yet 😈
 
 <!-- Add a link to your live demo in Github Pages 🌐-->
 
-<!-- ☝️ replace this description with a description of your own work -->
+ ✅ <!-- ☝️ replace this description with a description of your own work -->
 
-<!-- Add a nice image here at the end of the week, showing off your shiny frontend 📸 -->
+ ✅ <!-- Add a nice image here at the end of the week, showing off your shiny frontend 📸 -->
 
 <!-- Maybe a table of contents here? 📚 -->
 
 <!-- How about a section that describes how to install this project? 🤓 -->
 
-<!-- ...but how does one use this project? What are its features 🤔 -->
+ ✅ <!-- ...but how does one use this project? What are its features 🤔 -->
 
-<!-- What external data source is featured in your project and what are its properties 🌠 -->
+ ✅ <!-- What external data source is featured in your project and what are its properties 🌠 -->
 
 <!-- This would be a good place for your data life cycle ♻️-->
 

@@ -49,7 +49,7 @@ Uiteindelijk is [css-tricks](https://css-tricks.com/restart-css-animation/) zo l
 
 Het weghalen en weer toevoegen van de Class leek mij in de eerste instantie genoeg om ervoor te zorgen dat hij herstart zou woren. Helaas was dit niet waar. Gelukkig heeft `void obstacle.offsetWidth;` mij geholpen om de hapering uit de animatie te halen. Dit was mijn aller ergste bug.
 
-### Socket.broadcast.emit
+## Socket.broadcast.emit
 Om de app real-time te maken heb ik [socket.io](socket.io) gebruikt. Deze library zorgt ervoor dat er een real-time connectie wordt gemaakt tussen de Server-side javascript en de Client-side javascript. Het krachtige van Socket.io is dat het heel makkelijk te begrijpen is. Ik geef een voorbeeld uit mijn app. 
 
 1. Vanuit de Client wordt elke 200ms de locatie van jou "bird" verstuurd naar de server.
@@ -68,7 +68,7 @@ socket.on("enemyUpdate", (enemyId, enemyPosish, alive, amount) => {
 })
 ```
 
-#### Aantal server-side socket functies
+### Aantal server-side socket functies
 
 - `io.on('connection')`
     - checkt of er een nieuwe verbinding is en triggert
@@ -94,34 +94,36 @@ socket.on("enemyUpdate", (enemyId, enemyPosish, alive, amount) => {
 - `socket.on('disconnect')`
     - Verbreekt connectie met die client. Deze functie houdt ook bij hoeveel spelers er "online" zijn
 
-#### Aantal server-side socket functies op basis van Twitter
+### Aantal server-side socket functies op basis van Twitter
 
 - `stream.on('tweet', tweet)`
     - Kijkt of er een tweet binnen is gekomen (die binnen mijn kriteria valt). Triggert:
     - `io.emit("tweet", tweet.user.name, tweet.user.profile_image_url_https, tweet.text, "upside down")` of
     - `io.emit("tweet", tweet.user.name, tweet.user.profile_image_url_https, tweet.text, "speed up")`
 
-#### Data-model
+## Data-model
 ![Datamodel](https://github.com/muise001/real-time-web-1819/blob/master/img/datamodel.png)
 
-<!-- Add a link to your live demo in Github Pages 🌐-->
+## How to install
 
- ✅ <!-- ☝️ replace this description with a description of your own work -->
+1. Clone of download deze Repo.
+2. Open terminal and schrijf `cd ../[MYDIR]/flappyBird` (ipv [MYDUR] exact het path schrijven naar de geclonede of gedownloade map)
+3. Klik op enter.
+4. schrijf in terminal `npm install`
+5. Klaar met installeren? `npm start`
+6. Veel plezier
 
- ✅ <!-- Add a nice image here at the end of the week, showing off your shiny frontend 📸 -->
+TIP :
 
-<!-- Maybe a table of contents here? 📚 -->
-
-<!-- How about a section that describes how to install this project? 🤓 -->
-
- ✅ <!-- ...but how does one use this project? What are its features 🤔 -->
-
- ✅ <!-- What external data source is featured in your project and what are its properties 🌠 -->
-
-<!-- This would be a good place for your data life cycle ♻️-->
+Installeer [NGROK](https://ngrok.com/) en maak je eigen server.
+1. Open nog een terminal vensteren schrijf `npm install ngrok -g`
+2. Daarna `ngrok http 3400`.
+3. Deel de link met je vrienden
 
 <!-- Maybe a checklist of done stuff and stuff still on your wishlist? ✅ -->
+## Wishlist 
 
-<!-- How about a license here? 📜 (or is it a licence?) 🤷 -->
-
-[rubric]: https://docs.google.com/spreadsheets/d/e/2PACX-1vSd1I4ma8R5mtVMyrbp6PA2qEInWiOialK9Fr2orD3afUBqOyvTg_JaQZ6-P4YGURI-eA7PoHT8TRge/pubhtml
+- [x] A working flappy bird
+- [x] Multiplayer functionalities
+- [x] Game gets manipulated by Twitter
+- [ ] Game rooms and closed game rooms

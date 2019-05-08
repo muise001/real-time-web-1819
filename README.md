@@ -100,7 +100,7 @@ socket.on("enemyUpdate", (enemyId, enemyPosish, alive, amount) => {
     - `io.emit("tweet", tweet.user.name, tweet.user.profile_image_url_https, tweet.text, "speed up")`
 
 #### Data-model
-![Datamodel](https://github.com/muise001/real-time-web-1819/blob/master/img/Schermafbeelding%202019-05-08%20om%2009.25.00.png)
+![Datamodel](https://github.com/muise001/real-time-web-1819/blob/master/img/datamodel.png)
 
 > If you're seeing this message on a forked repo, it means one of our students hasn't changed the description yet 😈
 

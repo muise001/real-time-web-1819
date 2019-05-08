@@ -13,7 +13,7 @@ Wat ik in 2013 miste was een multiplayer. Die heb ik - weliswaar 6 jaar later - 
 5. Daarna heb ik ervoor gezorgd dat de tweets die real-time binnenkomen invloed hebben op het spel
 
 ## De App
-![Flappy Bird gif](https://github.com/muise001/real-time-web-1819/blob/master/flappy.gif)
+![Flappy Bird gif](https://github.com/muise001/real-time-web-1819/blob/master/img/flappy.gif)
 
 Wat kan mijn Flappy Bird wat jou Flappy Bird niet kan?
 Mijn flappy bird is ge-connect met [Twit](https://www.npmjs.com/package/twit). Twit is een Real-time socket-based stream API. Aan deze API kan je kriteria meegeven en dan houdt hij bij of er op dat moment die woorden of vanuit een bepaalde plaats etc. wordt getweet. Deze tweets kan je dat ophalen.
@@ -99,6 +99,8 @@ socket.on("enemyUpdate", (enemyId, enemyPosish, alive, amount) => {
     - `io.emit("tweet", tweet.user.name, tweet.user.profile_image_url_https, tweet.text, "upside down")` of
     - `io.emit("tweet", tweet.user.name, tweet.user.profile_image_url_https, tweet.text, "speed up")`
 
+#### Data-model
+![Datamodel](https://github.com/muise001/real-time-web-1819/blob/master/img/Schermafbeelding%202019-05-08%20om%2009.25.00.png)
 
 > If you're seeing this message on a forked repo, it means one of our students hasn't changed the description yet 😈
 

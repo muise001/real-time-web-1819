@@ -15,6 +15,8 @@ Wat ik in 2013 miste was een multiplayer. Die heb ik - weliswaar 6 jaar later - 
 ## De App
 ![Flappy Bird gif](https://github.com/muise001/real-time-web-1819/blob/master/img/flappy.gif)
 
+[Klik hier om zelf Flappy Bird te spelen](https://bt-abavlgcoci.now.sh/)
+
 Wat kan mijn Flappy Bird wat jou Flappy Bird niet kan?
 Mijn flappy bird is ge-connect met [Twit](https://www.npmjs.com/package/twit). Twit is een Real-time socket-based stream API. Aan deze API kan je kriteria meegeven en dan houdt hij bij of er op dat moment die woorden of vanuit een bepaalde plaats etc. wordt getweet. Deze tweets kan je dat ophalen.
 
@@ -101,8 +103,6 @@ socket.on("enemyUpdate", (enemyId, enemyPosish, alive, amount) => {
 
 #### Data-model
 ![Datamodel](https://github.com/muise001/real-time-web-1819/blob/master/img/datamodel.png)
-
-> If you're seeing this message on a forked repo, it means one of our students hasn't changed the description yet 😈
 
 <!-- Add a link to your live demo in Github Pages 🌐-->
 
